@@ -6,15 +6,12 @@ import re
 
 # API connection
 
+API_VERSION = '2020-7'
 SHOP_NAME= 'fost2a'
 shop_url = "https://%s:%s@%s.myshopify.com/admin" % (API_KEY, PASSWORD, SHOP_NAME)
 shopify.ShopifyResource.set_site(shop_url)
 shop = shopify.Shop.current()
 
-# connection test
-product = shopify.Product.find(5275133477027)
-print(bool(shopify.Product.find(5275133477027)))
-product.price = 15 ;
 
 
 # scrapping site
@@ -30,15 +27,43 @@ for result in res:
        size = result.find('div' ,class_='attribute size-attribute').find('ul',class_='swatches size clearfix').text
      #  print (title,pricestandard, pricesales,size)
 
+product= shopify.Product()
+{
+  "product": {
+    "title": title,
+    "body_html": "<strong>Good snowboard!</strong>",
+    "vendor": "fost2a",
+    "product_type": "Snowboard",
+    "variants": [
+      {
+        "option1": "Blue",
+        "option2": "155"
+      },
+      {
+        "option1": "Black",
+        "option2": "159"
+      }
+    ],
+    "options": [
+      {
+        "name": "Color",
+        "values": [
+          "Blue",
+          "Black"
+        ]
+      },
+      {
+        "name": "Size",
+        "values": [
+          "155",
+          "159"
+        ]
+      }
+    ]
+  }
+}
 
-
-
-# Create a new product
-new_product= shopify.Product()
-new_product.title =title
-new_product.size=size
-new_product.vendor = "fost2a"
-success = new_product.save()
+success = product.save()
 
 
 
