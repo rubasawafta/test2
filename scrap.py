@@ -4,6 +4,8 @@ import shopify
 
 
 # API connection--------------------------------------------------------------------------------------------------
+API_VERSION = '2020-7'
+SHOP_NAME = 'fost2a'
 
 shop_url = "https://%s:%s@%s.myshopify.com/admin" % (API_KEY, API_PASSWORD, SHOP_NAME)
 shopify.ShopifyResource.set_site(shop_url)
@@ -48,17 +50,18 @@ product = shopify.Product()
 product.title = title
 product.product_type = Model_type
 product.body_html= des
+product.vendor='fost2a'
 product.sku = sku
 variants = []
 for size in sizes:
     v = shopify.Variant()
-    v.option1 = size
-    v.price = pricestandard
+    v.option1 = size.strip()
+    v.price ="50"
     v.sku=sku
     variants.append(v)
 product.variants = variants
 product.options = [
-    {"name": "Size", "values": sizes,"sku":sku}
+    {"name": "Size", "values": sizes}
 ]
 product.images = images
 success = product.save()
