@@ -4,10 +4,7 @@ import shopify
 
 
 # API connection--------------------------------------------------------------------------------------------------
-API_VERSION = '2020-7'
-SHOP_NAME = 'fost2a'
-API_KEY = '5c27637b28787a5217308728c6797a20'
-API_PASSWORD = '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'
+
 shop_url = "https://%s:%s@%s.myshopify.com/admin" % (API_KEY, API_PASSWORD, SHOP_NAME)
 shopify.ShopifyResource.set_site(shop_url)
 shop = shopify.Shop.current()
